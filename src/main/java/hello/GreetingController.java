@@ -19,7 +19,25 @@ public class GreetingController {
 
     @RequestMapping("/movies")
     public String movies() {
-        //TODO : Code recupération movies
-        return "moovies";
+        List<String> listMovies = new ArrayList<String>();
+        String sqlSelectAllMovies = "SELECT * FROM movies";
+        String connectionUrl = "jdbc:mysql://127.0.0.1:3306/movies?serverTimezone=UTC";
+
+        try (Connection conn = DriverManager.getConnection(connectionUrl,"root","admin");
+            Prepared Statement ps = conn.prepareStatement(sqlSelectAllMovies);
+            ResultSet rs = ps.executeQuery()){
+            
+                while (rs.next()) {
+                    System.out.print("ICI");
+                    String title = rs.getString("title");
+                    listMovies.add(tittle);
+                }
+        
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+        return listMovies.toString();
+        
     }
 }
