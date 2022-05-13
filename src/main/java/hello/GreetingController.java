@@ -28,14 +28,13 @@ public class GreetingController {
             ResultSet rs = ps.executeQuery()){
             
                 while (rs.next()) {
-                    System.out.print("ICI");
                     String title = rs.getString("title");
-                    listMovies.add(tittle);
+                    listMovies.add(title);
                 }
         
-            } catch (SQLException throwables) {
+        } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            }
+        }
 
         return listMovies.toString();
         
