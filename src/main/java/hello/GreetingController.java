@@ -23,20 +23,18 @@ public class GreetingController {
         String sqlSelectAllMovies = "SELECT * FROM movies";
         String connectionUrl = "jdbc:mysql://127.0.0.1:3306/movies?serverTimezone=UTC";
 
-        try (Connection conn = DriverManager.getConnection(connectionUrl,"root","admin");
-            Prepared Statement ps = conn.prepareStatement(sqlSelectAllMovies);
-            ResultSet rs = ps.executeQuery()){
-            
-                while (rs.next()) {
+        try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "admin");
+             PreparedStatement ps = conn.prepareStatement(sqlSelectAllMovies);
+             ResultSet rs = ps.executeQuery()) {
+
+                 while (rs.next()) {
                     String title = rs.getString("title");
                     listMovies.add(title);
-                }
-        
-        } catch (SQLException throwables) {
-                throwables.printStackTrace();
-        }
+                 }
 
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         return listMovies.toString();
-        
     }
 }
