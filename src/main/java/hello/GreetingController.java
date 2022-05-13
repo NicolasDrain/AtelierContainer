@@ -1,6 +1,6 @@
 package hello;
 
-import java.sql;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,23 +22,22 @@ public class GreetingController {
 
     @RequestMapping("/movies")
     public String movies() {
-        List<String> listMovies = new ArrayList<>();
+        List<String> listMovies = new ArrayList<String>();
         String sqlSelectAllMovies = "SELECT * FROM movies";
-        String connectionUrl = "jdbc:mysql://127.0.0.1:3308/MOVIES?serverTimezone=UTC";
+        String connectionUrl = "jdbc:mysql://127.0.0.1:3306/movies?serverTimezone=UTC";
 
         try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "admin");
              PreparedStatement ps = conn.prepareStatement(sqlSelectAllMovies);
              ResultSet rs = ps.executeQuery()) {
 
-            while (rs.next()) {
-                System.out.println("ICI");
-                String title = rs.getString("title");
-                listMovies.add(title);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return listMovies.toString();
+                 while (rs.next()) {
+                    String title = rs.getString("title");
+                    listMovies.add(title);
+                 }
 
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        return listMovies.toString();
     }
 }
