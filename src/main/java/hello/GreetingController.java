@@ -20,10 +20,10 @@ public class GreetingController {
                             String.format(template, name));
     }
 
-    @RequestMapping("/MOVIES")
+    @RequestMapping("/movies")
     public String movies() {
         List<String> listMovies = new ArrayList<>();
-        String sqlSelectAllMovies = "SELECT FROM movies";
+        String sqlSelectAllMovies = "SELECT * FROM movies";
         String connectionUrl = "jdbc:mysql://127.0.0.1:3308/MOVIES?serverTimezone=UTC";
 
         try (Connection conn = DriverManager.getConnection(connectionUrl, "root", "admin");
